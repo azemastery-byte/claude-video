@@ -1,5 +1,16 @@
 # Podcast multicam edit – Zafesha Simply (Host Najwa × KS)
 
+## Final combined video (Part 1 + Part 2)
+`Zafesha KS Podcast - FULL (Part 1+2) - YouTube 1080p.mp4` (uploaded to Google Drive) – 1:28:16, 1920x1080 30fps,
+H.264 High (CRF 18, ~8 Mbps), AAC 320 kbps 48 kHz, −14 LUFS.
+
+Final pass:
+- **Noise reduction**: DeepFilterNet3 on the full raw audio before cutting (noise floor −44 → −60 dB), then highpass, gentle compression, two-pass loudnorm (−14 LUFS for YouTube).
+- **Picture**: light contrast/saturation lift and sharpening; extra sharpening on the host punch-in; BT.709 tagged.
+- **Sync check**: every close-up clip cross-correlated against the master audio – all within ±8 ms (< 1/4 frame).
+- **Cut check**: remaining silences ≥1 s tightened; every cut point verified to land in silence (auto-extended/snapped when on speech); content cuts verified by re-transcribing the output.
+- Pipeline: `dfden.py` → `env10.py` → `finalize.py` / `snapcuts.py` → `synccheck.py` → `mkjobs_all.py` → `mkaudio_all.py` → concat + mux → `upload_drive.py`. Clip list: `edit/combined_clips.json`.
+
 Two recording parts, edited with the same pipeline:
 
 | Part | Source files | Raw | Edited | EDL |
